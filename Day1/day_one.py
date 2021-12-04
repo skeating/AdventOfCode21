@@ -22,12 +22,29 @@ def is_increase(line1, line2):
         return 0
 
 
-def main():
-    with FileManager('./data/input.txt', mode="r", encoding='utf-8') as f1:
+def count_inc(filename):
+    with FileManager(filename, mode="r", encoding='utf-8') as f1:
         lines = f1.readlines()
         counter = 0
         for i in range(1, len(lines)):
             counter += is_increase(lines[i-1], lines[i])
+    return counter
+
+
+def create_windows(input_filename, windows_filename):
+    with FileManager(input_filename, mode="r", encoding='utf-8') as f1:
+        lines = f1.readlines()
+        with FileManager(windows_filename, mode="w", encoding='utf-8') as fout:
+            for i in range(2, len(lines)):
+                win = int(lines[i-2]) + int(lines[i-1]) + int(lines[i])
+                fout.write(f'{win}\n')
+
+
+def main():
+    input_file = './data/input.txt'
+    windows_file = './data/win.txt'
+    create_windows(input_file, windows_file)
+    counter = count_inc(windows_file)
     print(counter)
 
 
