@@ -43,9 +43,10 @@ def create_windows(input_filename, windows_filename):
 def main():
     input_file = './data/input.txt'
     windows_file = './data/win.txt'
+    ans_p1 = count_inc(input_file)
     create_windows(input_file, windows_file)
     counter = count_inc(windows_file)
-    print(counter)
+    print(f'Part 1: {ans_p1}\nPart 2: {counter}\n')
 
 
 if __name__ == "__main__":
